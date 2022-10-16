@@ -2,6 +2,7 @@ import discord
 import discord.ext.commands as bot
 import asyncio
 from event.memberjoin.controlmemberjoin import EventControllerMemberJoin
+from event.valorantassistent.controlvalorantassistent import EventControllerValorantAssistent
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -14,19 +15,15 @@ async def on_member_join(member):
     ''' Greets a new member when they join the channel. '''
 
     controller = EventControllerMemberJoin()
-    await controller.handleEvent(member)
+    await controller.handle_event(member)
 
 
 
-@bot.command(name="valorant_stats")
-async def _valorant_stats(context, *args):
-    ''' Gets the users valorant stats. This command requires the users valorant username. '''
+@bot.command(name="HeyCypher")
+async def _valorant_assistent(context, *args):
+    ''' Handles valorant queries '''
 
-    # We are joining the args with a space between each item.
-    # This will be seen as a single username when searching for the users stats.
-    username = "SaturnKT#skt" # TODO: We need to get the users username
+    controller = EventControllerValorantAssistent()
+    await controller.handle_event(context, args)
 
-    # Construct URL: https://tracker.gg/valorant/profile/riot/{username}/overview
-    await context.send(f'https://tracker.gg/valorant/profile/riot/{username}/overview')
-
-bot.run('ADD_BOT_TOKEN')
+bot.run('Add Bot TOKEN here')

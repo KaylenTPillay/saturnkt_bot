@@ -7,7 +7,7 @@ class EventControllerMemberJoin:
     def __init__(self, greeting_channel_name='general'):
         self.greeting_channel_name = greeting_channel_name
 
-    async def handleEvent(self, member):
+    async def handle_event(self, member):
         channel_name = self.greeting_channel_name
         await self.__perform_greeting(channel_name, member)
 
